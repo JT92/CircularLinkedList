@@ -9,7 +9,7 @@ namespace CircularLinkedListProject
     class CircularLinkedList
     {
         private Node last;
-        
+
         public CircularLinkedList()
         {
             last = null;
@@ -25,8 +25,8 @@ namespace CircularLinkedListProject
 
             if (n == 0)
                 return;
-            
-            for (i=0; i<n; i++)
+
+            for (i = 0; i < n; i++)
             {
                 Console.Write("Enter the element to be inserted: ");
                 theValue = Convert.ToInt32(Console.ReadLine());
@@ -38,7 +38,7 @@ namespace CircularLinkedListProject
         public void PrintList()
         {
             // if list is empty
-            if(last == null)
+            if (last == null)
             {
                 Console.WriteLine("List is empty\n");
                 return;
@@ -48,9 +48,9 @@ namespace CircularLinkedListProject
             Node p = last.link;
             do
             {
-                Console.Write( p.value + " " );
+                Console.Write(p.value + " ");
                 p = p.link;
-            } while ( p != last.link );
+            } while (p != last.link);
             Console.WriteLine();
         }
 
@@ -113,7 +113,7 @@ namespace CircularLinkedListProject
                     last = temp;
             }
         }
-        
+
         // Delete first node
         public void DeleteFirst()
         {
@@ -173,7 +173,7 @@ namespace CircularLinkedListProject
                     break;
                 p = p.link;
             } while (p.link != last.link);
-            
+
             // if value not found
             if (p.link.value != theNode)
             {
@@ -184,10 +184,32 @@ namespace CircularLinkedListProject
             // if we are deleting the last* value
             if (p.link == last)
                 p = last;
-           
+
             // else delete the node;
             else
                 p.link = p.link.link;
         }
+
+        // Concatenate another list
+        public void Concatenate(CircularLinkedList list)
+        {
+            // if this list is empty
+            if (last == null)
+            {
+                last = list.last;
+                return;
+            }
+
+            // if other list is empty
+            if (list.last == null)
+                return;
+
+            // else concatenate
+            Node p = last.link;
+            last.link = list.last.link;
+            list.last.link = p;
+            last = list.last;
+        }
+
     }
 }
